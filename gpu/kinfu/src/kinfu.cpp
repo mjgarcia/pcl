@@ -220,8 +220,9 @@ pcl::gpu::KinfuTracker::allocateBufffers (int rows, int cols)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool
-pcl::gpu::KinfuTracker::operator() (const DepthMap& depth_raw, 
-    Eigen::Affine3f *hint)
+pcl::gpu::KinfuTracker::operator() (const DepthMap& depth_raw,
+				    Eigen::Affine3f *hint,
+				    float sigma_color, float sigma_space)
 {  
   device::Intr intr (fx_, fy_, cx_, cy_);
 
@@ -230,7 +231,7 @@ pcl::gpu::KinfuTracker::operator() (const DepthMap& depth_raw,
       {
         //ScopeTime time(">>> Bilateral, pyr-down-all, create-maps-all");
         //depth_raw.copyTo(depths_curr[0]);
-        device::bilateralFilter (depth_raw, depths_curr_[0]);
+        device::bilateralFilter (depth_raw, depths_curr_[0], sigma_color, sigma_space);
 
         if (max_icp_distance_ > 0)
           device::truncateDepth(depths_curr_[0], max_icp_distance_);

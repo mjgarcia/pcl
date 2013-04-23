@@ -177,7 +177,7 @@ namespace pcl
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void
-pcl::device::bilateralFilter (const DepthMap& src, DepthMap& dst)
+pcl::device::bilateralFilter (const DepthMap& src, DepthMap& dst, float sigma_color, float sigma_space)
 {
   dim3 block (32, 8);
   dim3 grid (divUp (src.cols (), block.x), divUp (src.rows (), block.y));

@@ -128,7 +128,7 @@ namespace pcl
           * \param[in] Depth next frame with values in millimeters
           * \return true if can render 3D view.
           */
-        bool operator() (const DepthMap& depth, Eigen::Affine3f* hint=NULL);
+        bool operator() (const DepthMap& depth, Eigen::Affine3f* hint=NULL, float sigma_color=30.0f, float sigma_space=4.5f);
 
         /** \brief Processes next frame (both depth and color integration). Please call initColorIntegration before invpoking this.
           * \param[in] depth next depth frame with values in millimeters
